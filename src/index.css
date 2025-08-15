@@ -17,24 +17,42 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* JUGAD Brand Colors - Travel & Trust Theme */
+    --primary: 217 91% 60%; /* Travel Blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 91% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 142 76% 36%; /* Nature Green */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --success: 142 76% 36%; /* Green for success states */
+    --success-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --warning: 43 96% 56%; /* Golden for highlights */
+    --warning-foreground: 222.2 84% 4.9%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --accent: 217 91% 95%; /* Very light blue */
+    --accent-foreground: 217 91% 30%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+
+    /* Gradients for pricing cards */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(var(--accent)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--secondary) / 0.05));
+    
+    /* Shadows with brand colors */
+    --shadow-pricing: 0 10px 30px -10px hsl(var(--primary) / 0.1);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.2);
+    --shadow-success: 0 4px 20px hsl(var(--success) / 0.15);
 
     --radius: 0.5rem;
 
@@ -101,5 +119,57 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Pricing card animations */
+  .pricing-card {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-[var(--shadow-pricing)];
+  }
+  
+  .pricing-card-featured {
+    @apply ring-2 ring-primary shadow-[var(--shadow-glow)] scale-[1.02];
+  }
+  
+  /* Smooth gradient backgrounds */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  /* Interactive elements */
+  .toggle-button {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .toggle-button-active {
+    @apply bg-primary text-primary-foreground shadow-sm scale-[0.98];
+  }
+  
+  /* Credit scale visual */
+  .credit-scale-line {
+    @apply h-2 bg-gradient-to-r from-muted via-primary/30 to-primary rounded-full relative overflow-hidden;
+  }
+  
+  .credit-scale-marker {
+    @apply absolute top-0 w-4 h-4 rounded-full border-2 border-background transform -translate-x-1/2 -translate-y-1;
+  }
+  
+  /* Sticky animations */
+  .sticky-enter {
+    @apply animate-in slide-in-from-bottom-4 duration-300;
+  }
+  
+  /* Success animations */
+  .success-pulse {
+    @apply animate-pulse shadow-[var(--shadow-success)];
   }
 }
